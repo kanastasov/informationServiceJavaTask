@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -33,5 +34,13 @@ public class Mails {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "people_id", referencedColumnName = "id")
 	private People people;
+	
+	
+//	@JsonBackReference
+//    @NotNull(message = "{Need to have value for people}")
+//    @Valid
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "people_id", referencedColumnName = "id")
+//    private People people;
 
 }
