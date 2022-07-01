@@ -1,0 +1,27 @@
+create database informationService;
+
+
+INSERT INTO public.people(
+	 full_name, pin)
+	VALUES ( 'Ivan Petrov', 1234567891),
+    	 ( 'Ivan Ivanov', 1234567891),
+        	 ( 'Ivan Georgiev', 1234567891),
+            	 ( 'Petar Ivanov', 1234567891),
+                	 ( 'Zahari Petrov', 1234567891),
+                    	 ( 'Georgi Petrov', 1234567891);
+
+INSERT INTO public.mails(
+	email, email_type, people_id)
+	VALUES ('ivan_petrov3@gmail.com', 'gmail', 1),
+     ('ivan_petrov4@gmail.com', 'gmail', 1),
+        ('ivan_petrov5@gmail.com', 'gmail', 1),
+           ('ivan_petrov6@gmail.com', 'gmail', 1),
+            ('ivan_petrov7@gmail.com', 'gmail', 1);
+     
+     INSERT INTO public.addresses(
+   addr_info, addr_type, people_id)
+	VALUES ('info', 'type', 1),
+    	 ('info', 'type', 1),
+        	 ('info', 'type', 1),
+            	 ('info', 'type', 1),
+    	 ('info', 'type', 1);
