@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -24,6 +25,13 @@ public class Addresses {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "people_id", referencedColumnName = "id")
 	private People people;
+	
+//	@JsonBackReference
+//	@NotNull(message = "{Need to have value for people}")
+//	@Valid
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "people_id", referencedColumnName = "id")
+//	private People people;
 
 	@NotNull
 	@Column(name = "addr_type", length = 5)

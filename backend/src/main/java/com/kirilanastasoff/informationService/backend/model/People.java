@@ -84,8 +84,10 @@ public class People {
 		this.addresses = addresses;
 	}
 
-	
-	
+	public People() {
+		super();
+	}
+
 	public People(@Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName, @Size(min = 10, max = 10) String pin) {
 		super();
 		this.fullName = fullName;
