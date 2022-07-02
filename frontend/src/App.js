@@ -6,6 +6,7 @@ import {
 import {Container} from 'react-bootstrap'
 import Home from './Home'
 import PeopleList from './PeopleList'
+import PeopleEdit from './PeopleEdit'
 
 
 
@@ -19,7 +20,7 @@ function App() {
 
              <Route path="/" element={<Home/>} exact/>
              <Route path="/api/people/" element={<PeopleList />} />
-             {/* <Route path="/cart/:id?" element={<CartScreen />} /> */}
+             <Route path="/api/people/:id" element={<PeopleEdit />} />
 
 
             
