@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter,useNavigate,Navigate  } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
-class PeopleEdit extends Component {
+
+
+
+class PeopleEdit  extends Component {
 
     emptyItem = {
         fullName: '',
-        pin: ''
+        pin: '',
+        email: '',
+        address:''
     };
 
     constructor(props) {
@@ -18,15 +23,19 @@ class PeopleEdit extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
     async componentDidMount() {
+      
+
+        // if peerson is not new set state 
         if (this.props.match.params.id !== 'new') {
+            // const people = await (await fetch(`http://localhost:8085/api/people/${11}`)).json();
             const people = await (await fetch(`http://localhost:8085/api/people/${this.props.match.params.id}`)).json();
+
             this.setState({item: people});
         }
     }
 
-    handleChange(event) {
+    handleChange(event) {   
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -35,7 +44,9 @@ class PeopleEdit extends Component {
         this.setState({item});
     }
 
+    
     async handleSubmit(event) {
+        
         event.preventDefault();
         const {item} = this.state;
     
@@ -47,8 +58,14 @@ class PeopleEdit extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('http://localhost:8085/api/people');
+      
+        // <Navigate to ="/" />
+        // this.props.navigation.navigate('http://localhost:8085/api/people');
+        //    <Link to='http://localhost:8085/api/people'>People</Link>
+        //    this.props.history.push('http://localhost:8085/api/people');
     }
+
+
 
     render() {
         const {item} = this.state;
@@ -69,9 +86,21 @@ class PeopleEdit extends Component {
                         <Input type="text" name="pin" id="pin" value={item.pin || ''}
                                onChange={this.handleChange} autoComplete="pin"/>
                     </FormGroup>
+
                     <FormGroup>
-                        <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="http://localhost:8085/api/people">Cancel</Button>
+                        <Label for="email">Email</Label>
+                        <Input type="text" name="email" id="email" value={item.email || ''}
+                               onChange={this.handleChange} autoComplete="email"/>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label for="Address">Address</Label>
+                        <Input type="text" name="Address" id="Address" value={item.Address || ''}
+                               onChange={this.handleChange} autoComplete="Address"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Button color="primary" tag={Link} to="/api/people" type="submit">Save</Button>{' '}
+                        <Button color="secondary" tag={Link} to="/">Cancel</Button>
                     </FormGroup>
                 </Form>
             </Container>
