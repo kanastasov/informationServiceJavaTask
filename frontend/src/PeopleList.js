@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component,useState } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import AppNavbar from './AppNavbar';
+import {toast,ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+
+// toast.configure()
 
 class PeopleList extends Component {
+ 
     state = {
         people: []
       };
@@ -49,12 +55,18 @@ class PeopleList extends Component {
           </tr>
       });
 
+      const notify = () => {
+        toast("Wow so easy!")
+
+      }
       return (
         <div>
             <AppNavbar/>
             <Container fluid>
                 <div className="float-right">
                     <Button color="success" tag={Link} to="/api/people/new">Add People</Button>
+                    <button onClick={notify}>Notify!</button>
+        <ToastContainer />
                 </div>
                 <h3>List of People</h3>
                 <Table className="mt-4">
