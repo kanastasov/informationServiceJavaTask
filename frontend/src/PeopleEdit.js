@@ -99,8 +99,8 @@ class PeopleEdit  extends Component {
                                onChange={this.handleChange} autoComplete="Address"/>
                     </FormGroup>
                     <FormGroup>
-                        <Button color="primary" tag={Link} to="/api/people" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/">Cancel</Button>
+                        <Button color="primary" type="submit" >Save</Button>{' '}
+                        <Button color="secondary" tag={Link} to="/api/people">Cancel</Button>
                     </FormGroup>
                 </Form>
             </Container>

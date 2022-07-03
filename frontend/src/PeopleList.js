@@ -38,6 +38,8 @@ class PeopleList extends Component {
           return <tr key={people.id}>
               <td style={{whiteSpace: 'nowrap'}}>{people.fullName}</td>
               <td>{people.pin}</td>
+              <td>{people.email}</td>
+              <td>{people.address}</td>
               <td>
                   <ButtonGroup>
                       <Button size="sm" color="primary" tag={Link} to={"/people" + people.id}>Edit</Button>
@@ -54,12 +56,14 @@ class PeopleList extends Component {
                 <div className="float-right">
                     <Button color="success" tag={Link} to="/api/people/new">Add People</Button>
                 </div>
-                <h3>people</h3>
+                <h3>List of People</h3>
                 <Table className="mt-4">
                     <thead>
                     <tr>
-                        <th width="30%">Full Name</th>
-                        <th width="30%">PIN</th>
+                        <th width="20%">Full Name</th>
+                        <th width="20%">PIN</th>
+                        <th width="30%">Email</th>
+                        <th width="30%">Address</th>
                         <th width="50%">Actions</th>
                     </tr>
                     </thead>
