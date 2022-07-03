@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter,useNavigate,Navigate  } from 'react-router-dom';
+import { Link, withRouter,useNavigate,Navigate,useParams  } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
@@ -24,15 +24,17 @@ class PeopleEdit  extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     async componentDidMount() {
-      
+        const personId = window.location.href.split('/')[6]
 
+        console.log(personId)
+        // this.props.match.params.id
         // if peerson is not new set state 
-        if (this.props.match.params.id !== 'new') {
-            // const people = await (await fetch(`http://localhost:8085/api/people/${11}`)).json();
-            const people = await (await fetch(`http://localhost:8085/api/people/${this.props.match.params.id}`)).json();
+        // if (this.props.match.params.id !== 'new') {
+            // const people = await (await fetch(`http://localhost:8085/api/people/${58}`)).json();
+            const people = await (await fetch(`http://localhost:8085/api/people/${personId}`)).json();
 
             this.setState({item: people});
-        }
+        // }
     }
 
     handleChange(event) {   
