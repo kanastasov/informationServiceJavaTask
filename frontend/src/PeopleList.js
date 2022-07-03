@@ -33,7 +33,7 @@ class PeopleList extends Component {
     
       render() {
         const {people} = this.state;
-
+        console.log(people)
         const peopleList = people.map(people => {
           return <tr key={people.id}>
               <td style={{whiteSpace: 'nowrap'}}>{people.fullName}</td>
@@ -42,7 +42,7 @@ class PeopleList extends Component {
               <td>{people.address}</td>
               <td>
                   <ButtonGroup>
-                      <Button size="sm" color="primary" tag={Link} to={"/people" + people.id}>Edit</Button>
+                      <Button size="sm" color="primary" tag={Link} to={"/api/people/new" + people.id}>Edit</Button>
                       <Button size="sm" color="danger" onClick={() => this.remove(people.id)}>Delete</Button>
                   </ButtonGroup>
               </td>

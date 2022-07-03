@@ -1,0 +1,9 @@
+Remaining tasks:
+
+
+When saving new person add mail and addr to db and table:
+
+fix edit and delete from ui:
+
+validate fields from hibernate name, pin email
+

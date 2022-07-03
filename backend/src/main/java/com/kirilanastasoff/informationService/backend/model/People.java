@@ -52,6 +52,14 @@ public class People {
 			CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<Addresses> addresses = new ArrayList();
 
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	
+
 	public String getFullName() {
 		return fullName;
 	}
@@ -87,12 +95,22 @@ public class People {
 	public People() {
 		super();
 	}
+	
+	
 
-	public People(@Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName, @Size(min = 10, max = 10) String pin) {
+	public People(long id, @Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName,
+			@Size(min = 10, max = 10) String pin) {
 		super();
+		this.id = id;
 		this.fullName = fullName;
 		this.pin = pin;
 	}
+
+//	public People(@Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName, @Size(min = 10, max = 10) String pin) {
+//		super();
+//		this.fullName = fullName;
+//		this.pin = pin;
+//	}
 
 	public People(@Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName, @Size(min = 10, max = 10) String pin,
 			List<Mails> mails, List<Addresses> addresses) {
@@ -102,5 +120,19 @@ public class People {
 		this.mails = mails;
 		this.addresses = addresses;
 	}
+
+	public People(long id, @Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName,
+			@Size(min = 10, max = 10) String pin, List<Mails> mails, List<Addresses> addresses) {
+		super();
+		this.id = id;
+		this.fullName = fullName;
+		this.pin = pin;
+		this.mails = mails;
+		this.addresses = addresses;
+	}
+	
+	
+	
+	
 
 }
