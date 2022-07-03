@@ -20,7 +20,10 @@ function App() {
 
              <Route path="/" element={<Home/>} exact/>
              <Route path="/api/people/" element={<PeopleList />} />
-             <Route path="/api/people/:id" element={<PeopleEdit />} />
+             <Route path="/api/people/new" element={<PeopleEdit />} />
+             <Route path="/api/people/new/:id" element={<PeopleEdit />} />
+             {/* <Route path="/api/people/:id" element={<PeopleEdit />} /> */}
+
 
 
             

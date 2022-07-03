@@ -52,7 +52,7 @@ class PeopleList extends Component {
             <AppNavbar/>
             <Container fluid>
                 <div className="float-right">
-                    <Button color="success" tag={Link} to="/people/new">Add People</Button>
+                    <Button color="success" tag={Link} to="/api/people/new">Add People</Button>
                 </div>
                 <h3>people</h3>
                 <Table className="mt-4">
