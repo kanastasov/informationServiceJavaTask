@@ -59,11 +59,11 @@ public class PeopleController {
 	@PostMapping("/people")
 	public ResponseEntity<People> createProduct(@RequestBody People product) {
 		try {
-			People _product = peopleRepository.save(new People(product.getFullName(), product.getPin()));
+			People _product = peopleRepository.save(new People(product.getId(), product.getFullName(), product.getPin()));
 			return new ResponseEntity<>(_product, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		} 
 	}
 
 	@PutMapping("/people/{id}")
