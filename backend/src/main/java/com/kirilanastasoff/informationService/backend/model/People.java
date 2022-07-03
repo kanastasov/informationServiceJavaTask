@@ -32,7 +32,7 @@ public class People {
 	@Column(name = "full_name", length = 90)
 	private String fullName;
 
-	@Size(min = 10, max = 10)
+	@Size(min = 10, max = 10, message = "Pin should be 10 characters.")
 	@Column(name = "pin", length = 10)
 	private String pin;
 

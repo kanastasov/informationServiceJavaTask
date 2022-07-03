@@ -3,9 +3,6 @@ import { Link, withRouter,useNavigate,Navigate,useParams  } from 'react-router-d
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
-
-
-
 class PeopleEdit  extends Component {
 
     emptyItem = {
@@ -26,15 +23,15 @@ class PeopleEdit  extends Component {
     async componentDidMount() {
         const personId = window.location.href.split('/')[6]
 
-        console.log(personId)
+        // console.log(personId)
         // this.props.match.params.id
         // if peerson is not new set state 
-        // if (this.props.match.params.id !== 'new') {
+        if (personId !== undefined) {
             // const people = await (await fetch(`http://localhost:8085/api/people/${58}`)).json();
             const people = await (await fetch(`http://localhost:8085/api/people/${personId}`)).json();
 
             this.setState({item: people});
-        // }
+        }
     }
 
     handleChange(event) {   
@@ -96,9 +93,9 @@ class PeopleEdit  extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="Address">Address</Label>
-                        <Input type="text" name="Address" id="Address" value={item.Address || ''}
-                               onChange={this.handleChange} autoComplete="Address"/>
+                        <Label for="address">Address</Label>
+                        <Input type="text" name="address" id="address" value={item.address || ''}
+                               onChange={this.handleChange} autoComplete="address"/>
                     </FormGroup>
                     <FormGroup>
                         <Button color="primary" type="submit" >Save</Button>{' '}

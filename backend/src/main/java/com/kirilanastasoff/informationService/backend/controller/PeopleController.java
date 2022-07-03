@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kirilanastasoff.informationService.backend.model.Addresses;
+import com.kirilanastasoff.informationService.backend.model.Mails;
 import com.kirilanastasoff.informationService.backend.model.People;
+import com.kirilanastasoff.informationService.backend.repository.AddressesRepository;
+import com.kirilanastasoff.informationService.backend.repository.MailsRepository;
 import com.kirilanastasoff.informationService.backend.repository.PeopleRepository;
 
 @RestController
@@ -28,6 +34,12 @@ public class PeopleController {
 
 	@Autowired
 	private PeopleRepository peopleRepository;
+	
+	@Autowired
+	private MailsRepository mailsRepository;
+	
+	@Autowired
+	private AddressesRepository addressesRepository;
 
 	@GetMapping("/people")
 	public ResponseEntity<List<People>> getAllPeople(@RequestParam(required = false) String fullName) {
@@ -60,6 +72,11 @@ public class PeopleController {
 	public ResponseEntity<People> createProduct(@RequestBody People product) {
 		try {
 			People _product = peopleRepository.save(new People(product.getId(), product.getFullName(), product.getPin()));
+			Mails _mails = mailsRepository.save(new Mails(1l, "type", "ivan@mail.com", _product));
+			
+			
+//			Addresses _addresses = addressesRepository.save(new Addresses(1l, _product, "addr", "drrr"));
+//			public Addresses(long id, People people, @NotNull String addrType, String addrInfo) {
 			return new ResponseEntity<>(_product, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

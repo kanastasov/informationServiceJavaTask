@@ -34,6 +34,58 @@ public class Mails {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "people_id", referencedColumnName = "id")
 	private People people;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getEmailType() {
+		return emailType;
+	}
+
+	public void setEmailType(String emailType) {
+		this.emailType = emailType;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public People getPeople() {
+		return people;
+	}
+
+	public void setPeople(People people) {
+		this.people = people;
+	}
+	
+	
+	
+
+	public Mails() {
+		super();
+	}
+
+	public Mails(long id, @NotNull String emailType, @Email String email, People people) {
+		super();
+		this.id = id;
+		this.emailType = emailType;
+		this.email = email;
+		this.people = people;
+	}
+	
+	
+	
+	
+	
 	
 	
 //	@JsonBackReference

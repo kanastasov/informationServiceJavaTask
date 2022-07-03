@@ -25,13 +25,6 @@ public class Addresses {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "people_id", referencedColumnName = "id")
 	private People people;
-	
-//	@JsonBackReference
-//	@NotNull(message = "{Need to have value for people}")
-//	@Valid
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "people_id", referencedColumnName = "id")
-//	private People people;
 
 	@NotNull
 	@Column(name = "addr_type", length = 5)
@@ -39,5 +32,56 @@ public class Addresses {
 
 	@Column(name = "addr_info", length = 300)
 	private String addrInfo;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public People getPeople() {
+		return people;
+	}
+
+	public void setPeople(People people) {
+		this.people = people;
+	}
+
+	public String getAddrType() {
+		return addrType;
+	}
+
+	public void setAddrType(String addrType) {
+		this.addrType = addrType;
+	}
+
+	public String getAddrInfo() {
+		return addrInfo;
+	}
+
+	public void setAddrInfo(String addrInfo) {
+		this.addrInfo = addrInfo;
+	}
+	
+	
+
+	public Addresses() {
+		super();
+	}
+
+	public Addresses(long id, People people, @NotNull String addrType, String addrInfo) {
+		super();
+		this.id = id;
+		this.people = people;
+		this.addrType = addrType;
+		this.addrInfo = addrInfo;
+	}
+	
+	
+	
+	
+	
 
 }
