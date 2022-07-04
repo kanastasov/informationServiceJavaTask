@@ -75,7 +75,7 @@ public class PeopleController {
 			Mails _mails = mailsRepository.save(new Mails(1l, "type", "ivan@mail.com", _product));
 			
 			
-//			Addresses _addresses = addressesRepository.save(new Addresses(1l, _product, "addr", "drrr"));
+			Addresses _addresses = addressesRepository.save(new Addresses(1l, _product, "addr", "drrr"));
 //			public Addresses(long id, People people, @NotNull String addrType, String addrInfo) {
 			return new ResponseEntity<>(_product, HttpStatus.CREATED);
 		} catch (Exception e) {
