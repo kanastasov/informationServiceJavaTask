@@ -39,13 +39,17 @@ class PeopleList extends Component {
     
       render() {
         const {people} = this.state;
-        console.log(people)
         const peopleList = people.map(people => {
+            console.log(people.mails)
+            
+
           return <tr key={people.id}>
               <td style={{whiteSpace: 'nowrap'}}>{people.fullName}</td>
               <td>{people.pin}</td>
-              <td>{people.email}</td>
-              <td>{people.address}</td>
+
+
+              <td>{people.mails[0].email}</td>
+              <td>{people.addresses[0].addrInfo}</td>
               <td>
                   <ButtonGroup>
                       <Button size="sm" color="primary" tag={Link} to={"/api/people/new/" + people.id}>Edit</Button>
