@@ -1,9 +1,13 @@
 Remaining tasks:
 
 
-When saving new person add mail and addr to db and table:
 
 validate fields from hibernate name, pin email
+
+Need to do front end validataion and display error like red label:
+
+
+
 
 add search on name
 
@@ -11,4 +15,3 @@ add search on name
 deploy on heroko
 
 
-DOne fix edit and delete from ui:
