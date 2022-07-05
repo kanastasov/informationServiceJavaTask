@@ -12,7 +12,9 @@ class PeopleEdit  extends Component {
         emailType: '',
         address:'',
         addressType:'',
-        errors:{}
+        errors:{},
+        mails: [],
+        addresses: []
     };
 
     constructor(props) {
@@ -48,7 +50,7 @@ class PeopleEdit  extends Component {
 
     
     formValidation = () => {
-        const {fullName, pin} = this.state;
+        const {fullName, pin,email,emailType,address,addressType} = this.state;
         let isValid = true;
         const errors = {};
 
@@ -104,10 +106,17 @@ class PeopleEdit  extends Component {
         const {item,errors} = this.state;
         const title = <h2>{item.id ? 'Edit People' : 'Add People'}</h2>;
 
+        if(item.mails[0] !== undefined){
+            console.log(item.mails[0].email)
+        }
+       
         return <div>
             <AppNavbar/>
             <Container>
                 {title}
+
+
+
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="fullName">Full Name</Label>
@@ -120,27 +129,35 @@ class PeopleEdit  extends Component {
                                onChange={this.handleChange} autoComplete="pin"/>
                     </FormGroup>
 
+
+
+                    {/* <td>{people.mails[0].email}</td>
+              <td>{people.mails[0].emailType}</td>
+              <td>{people.addresses[0].addrInfo}</td>
+              <td>{people.addresses[0].addrType}</td> */}
+
+              
                     <FormGroup>
                         <Label for="email">Email</Label>
-                        <Input type="text" name="email" id="email" value={item.email || ''}
+                        <Input type="text" name="email" id="email" value={item.mails[0] !== undefined ? item.mails[0].email : '' }
                                onChange={this.handleChange} autoComplete="email"/>
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="emailType">Email Type</Label>
-                        <Input type="text" name="emailType" id="emailType" value={item.emailType || ''}
+                        <Input type="text" name="emailType" id="emailType" value={item.mails[0] !== undefined ? item.mails[0].emailType : ''}
                                onChange={this.handleChange} autoComplete="emailType"/>
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="address">Address</Label>
-                        <Input type="text" name="address" id="address" value={item.address || ''}
+                        <Input type="text" name="address" id="address" value={item.addresses[0] !== undefined ? item.addresses[0].addrInfo : ''}
                                onChange={this.handleChange} autoComplete="address"/>
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="addressType">Address Type</Label>
-                        <Input type="text" name="addressType" id="addressType" value={item.addressType || ''}
+                        <Input type="text" name="addressType" id="addressType" value={item.addresses[0] !== undefined ? item.addresses[0].addrType : ''}
                                onChange={this.handleChange} autoComplete="addressType"/>
                     </FormGroup>
 
