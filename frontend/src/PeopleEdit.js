@@ -4,7 +4,9 @@ import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
 class PeopleEdit  extends Component {
+    item={
 
+    }
     emptyItem = {
         fullName: '',
         pin: '',
@@ -14,7 +16,9 @@ class PeopleEdit  extends Component {
         addressType:'',
         errors:{},
         mails: [],
-        addresses: []
+        addresses: [],
+        item:{},
+        // emailError: 'errr'
     };
 
     constructor(props) {
@@ -24,6 +28,7 @@ class PeopleEdit  extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
     async componentDidMount() {
         const personId = window.location.href.split('/')[6]
@@ -40,12 +45,79 @@ class PeopleEdit  extends Component {
     }
 
     handleChange(event) {   
+        // console.log(event)
+
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        // console.log(target)
+        console.log('value handleChange:',value)
+        console.log('name handleChange:',name)
+        let item = {...this.state.item};
+        item[name] = value;
+        this.setState({item});
+        // console.log(item[name])
+        // console.log(name)
+
+    }
+
+    handleChangeEmail = (event) => {
+
         const target = event.target;
         const value = target.value;
         const name = target.name;
         let item = {...this.state.item};
+        
         item[name] = value;
+
+        console.log('item handleChangeEmail:',item)
+        console.log(' item[name] handleChangeEmail:', item[name])
+
         this.setState({item});
+
+        // this.setState({[event.target.name]: event.target.value})
+    }
+
+    
+    handleChangeEmailType = (event) => {
+
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        let item = {...this.state.item};
+        
+        item[name] = value;
+
+        console.log('item handleChangeEmail:',item)
+        console.log(' item[name] handleChangeEmail:', item[name])
+
+        this.setState({item});
+
+        // this.setState({[event.target.name]: event.target.value})
+    }
+
+
+    
+    handleChangeArrays(event) {   
+
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        // console.log(target)
+        // console.log('value handleChange:',value)
+        // console.log('name handleChange:',name)
+        let item = {...this.state.item};
+
+        
+        item[name] = value;
+
+        console.log('item handleChangeEmail:',item)
+        console.log(' item[name] handleChangeEmail:', item[name])
+
+        this.setState({item});
+
     }
 
     
@@ -93,6 +165,10 @@ class PeopleEdit  extends Component {
             },
             body: JSON.stringify(item),
         });
+
+
+
+        alert("Success post !!");
     // }
         // <Navigate to ="/" />
         // this.props.navigation.navigate('http://localhost:8085/api/people');
@@ -105,10 +181,6 @@ class PeopleEdit  extends Component {
     render() {
         const {item,errors} = this.state;
         const title = <h2>{item.id ? 'Edit People' : 'Add People'}</h2>;
-
-        if(item.mails[0] !== undefined){
-            console.log(item.mails[0].email)
-        }
        
         return <div>
             <AppNavbar/>
@@ -128,37 +200,50 @@ class PeopleEdit  extends Component {
                         <Input type="text" name="pin" id="pin" value={item.pin || ''}
                                onChange={this.handleChange} autoComplete="pin"/>
                     </FormGroup>
-
-
-
-                    {/* <td>{people.mails[0].email}</td>
-              <td>{people.mails[0].emailType}</td>
-              <td>{people.addresses[0].addrInfo}</td>
-              <td>{people.addresses[0].addrType}</td> */}
-
-              
+              {/* {
+  "id": 93,
+  "fullName": "test hereel",
+  "pin": "1231231231",
+  "mails": [
+    {
+      "id": 36,
+      "emailType": "type",
+      "email": "ivan@mail.com"
+    }
+  ],
+  "addresses": [
+    {
+      "id": 28,
+      "addrType": "addr",
+      "addrInfo": "drrr"
+    }
+  ]
+} */}
                     <FormGroup>
                         <Label for="email">Email</Label>
-                        <Input type="text" name="email" id="email" value={item.mails[0] !== undefined ? item.mails[0].email : '' }
-                               onChange={this.handleChange} autoComplete="email"/>
+                        <Input type="text" name="email" id="email" value={item.mails[0] !== undefined ? item.mails[0].email : this.state.email }
+                               onChange={this.handleChangeEmail} autoComplete="email"/>
+                                {/* {
+                                this.state.emailError ? <span style={{ color: 'red', fontSize: '12px'}}>{  this.state.emailError}</span> : ''
+                                } */}
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="emailType">Email Type</Label>
-                        <Input type="text" name="emailType" id="emailType" value={item.mails[0] !== undefined ? item.mails[0].emailType : ''}
-                               onChange={this.handleChange} autoComplete="emailType"/>
+                        <Input type="text" name="emailType" id="emailType" value={item.mails[0] !== undefined ? item.mails[0].emailType : this.state.emailType}
+                               onChange={this.handleChangeEmailType} autoComplete="emailType"/>
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="address">Address</Label>
-                        <Input type="text" name="address" id="address" value={item.addresses[0] !== undefined ? item.addresses[0].addrInfo : ''}
-                               onChange={this.handleChange} autoComplete="address"/>
+                        <Input type="text" name="address" id="address" value={item.addresses[0] !== undefined ? item.addresses[0].addrInfo :  this.state.address}
+                               onChange={this.handleChangeEmail} autoComplete="address"/>
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="addressType">Address Type</Label>
-                        <Input type="text" name="addressType" id="addressType" value={item.addresses[0] !== undefined ? item.addresses[0].addrType : ''}
-                               onChange={this.handleChange} autoComplete="addressType"/>
+                        <Label for="addressType">Address Type</Label>   
+                        <Input type="text" name="addressType" id="addressType" value={item.addresses[0] !== undefined ? item.addresses[0].addrType : this.state.addressType}
+                               onChange={this.handleChangeEmail} autoComplete="addressType"/>
                     </FormGroup>
 
                 
