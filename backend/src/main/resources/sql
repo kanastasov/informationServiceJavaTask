@@ -1,27 +1,29 @@
 create database informationService;
 
 
+
 INSERT INTO public.people(
 	 full_name, pin)
 	VALUES ( 'Ivan Petrov', 1234567891),
     	 ( 'Ivan Ivanov', 1234567891),
         	 ( 'Ivan Georgiev', 1234567891),
             	 ( 'Petar Ivanov', 1234567891),
-                	 ( 'Zahari Petrov', 1234567891),
-                    	 ( 'Georgi Petrov', 1234567891);
+                	 ( 'Zahari Petrov', 1234567891);
+                         
+                         select * from public.people
 
 INSERT INTO public.mails(
 	email, email_type, people_id)
-	VALUES ('ivan_petrov3@gmail.com', 'gmail', 1),
-     ('ivan_petrov4@gmail.com', 'gmail', 1),
-        ('ivan_petrov5@gmail.com', 'gmail', 1),
-           ('ivan_petrov6@gmail.com', 'gmail', 1),
-            ('ivan_petrov7@gmail.com', 'gmail', 1);
+	VALUES ('ivan_petrov3@gmail.com', 'gmail', 140),
+     ('ivan_petrov4@gmail.com', 'gmail', 141),
+        ('ivan_petrov5@gmail.com', 'gmail', 142),
+           ('ivan_petrov6@gmail.com', 'gmail', 143),
+            ('ivan_petrov7@gmail.com', 'gmail', 144);
      
      INSERT INTO public.addresses(
    addr_info, addr_type, people_id)
-	VALUES ('info', 'type', 1),
-    	 ('info', 'type', 1),
-        	 ('info', 'type', 1),
-            	 ('info', 'type', 1),
-    	 ('info', 'type', 1);
+	VALUES ('Sofia,st vitoshka 20', 'local', 140),
+    	 ('Sofia,st vitoshka 21', 'local', 141),
+        	 ('Sofia,st vitoshka 22', 'local', 142),
+            	 ('Sofia,st vitoshka 23', 'local', 143),
+    	 ('Sofia,st vitoshka 24', 'local', 144);
