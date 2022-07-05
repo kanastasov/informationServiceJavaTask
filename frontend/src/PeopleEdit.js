@@ -9,7 +9,10 @@ class PeopleEdit  extends Component {
         fullName: '',
         pin: '',
         email: '',
-        address:''
+        emailType: '',
+        address:'',
+        addressType:'',
+        errors:{}
     };
 
     constructor(props) {
@@ -44,11 +47,42 @@ class PeopleEdit  extends Component {
     }
 
     
+    formValidation = () => {
+        const {fullName, pin} = this.state;
+        let isValid = true;
+        const errors = {};
+
+        if(fullName.trim().length < 6){
+            errors.fullNameLength = "fullName must be if length 6 or higher";
+            isValid = false;
+        }
+
+        if(pin.trim().length != 10){
+            errors.pinLength = "pin must be if length 10";
+            isValid = false;
+        }
+
+        if(pin.trim().email < 5){
+            errors.pinLength = "email must be if length 5";
+            isValid = false;
+        }
+
+        this.setState({errors});
+        return isValid;
+
+    }
+    
     async handleSubmit(event) {
         
         event.preventDefault();
+
+        // const isValid = this.formValidation();
+
+
         const {item} = this.state;
-    
+        // if(isValid) {
+
+        
         await fetch('http://localhost:8085/api/people' + (item.id ? '/' + item.id : ''), {
             method: (item.id) ? 'PUT' : 'POST',
             headers: {
@@ -57,7 +91,7 @@ class PeopleEdit  extends Component {
             },
             body: JSON.stringify(item),
         });
-      
+    // }
         // <Navigate to ="/" />
         // this.props.navigation.navigate('http://localhost:8085/api/people');
         //    <Link to='http://localhost:8085/api/people'>People</Link>
@@ -67,7 +101,7 @@ class PeopleEdit  extends Component {
 
 
     render() {
-        const {item} = this.state;
+        const {item,errors} = this.state;
         const title = <h2>{item.id ? 'Edit People' : 'Add People'}</h2>;
 
         return <div>
@@ -93,14 +127,32 @@ class PeopleEdit  extends Component {
                     </FormGroup>
 
                     <FormGroup>
+                        <Label for="emailType">Email Type</Label>
+                        <Input type="text" name="emailType" id="emailType" value={item.emailType || ''}
+                               onChange={this.handleChange} autoComplete="emailType"/>
+                    </FormGroup>
+
+                    <FormGroup>
                         <Label for="address">Address</Label>
                         <Input type="text" name="address" id="address" value={item.address || ''}
                                onChange={this.handleChange} autoComplete="address"/>
                     </FormGroup>
+
+                    <FormGroup>
+                        <Label for="addressType">Address Type</Label>
+                        <Input type="text" name="addressType" id="addressType" value={item.addressType || ''}
+                               onChange={this.handleChange} autoComplete="addressType"/>
+                    </FormGroup>
+
+                
                     <FormGroup>
                         <Button color="primary" type="submit" >Save</Button>{' '}
                         <Button color="secondary" tag={Link} to="/api/people">Cancel</Button>
                     </FormGroup>
+                    {/* {Object.keys(errors).map((key) =>{
+                        return <div style={{color:"red"}} key={key}>{errors[key]}</div>
+                    })} */}
+
                 </Form>
             </Container>
         </div>

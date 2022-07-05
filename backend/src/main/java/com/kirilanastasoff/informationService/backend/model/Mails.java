@@ -66,12 +66,16 @@ public class Mails {
 	public void setPeople(People people) {
 		this.people = people;
 	}
-	
-	
-	
 
 	public Mails() {
 		super();
+	}
+
+	public Mails(@NotNull String emailType, @Email String email, People people) {
+		super();
+		this.emailType = emailType;
+		this.email = email;
+		this.people = people;
 	}
 
 	public Mails(long id, @NotNull String emailType, @Email String email, People people) {
@@ -81,18 +85,5 @@ public class Mails {
 		this.email = email;
 		this.people = people;
 	}
-	
-	
-	
-	
-	
-	
-	
-//	@JsonBackReference
-//    @NotNull(message = "{Need to have value for people}")
-//    @Valid
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "people_id", referencedColumnName = "id")
-//    private People people;
 
 }

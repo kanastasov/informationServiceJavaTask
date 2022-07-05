@@ -64,11 +64,16 @@ public class Addresses {
 	public void setAddrInfo(String addrInfo) {
 		this.addrInfo = addrInfo;
 	}
-	
-	
 
 	public Addresses() {
 		super();
+	}
+
+	public Addresses(People people, @NotNull String addrType, String addrInfo) {
+		super();
+		this.people = people;
+		this.addrType = addrType;
+		this.addrInfo = addrInfo;
 	}
 
 	public Addresses(long id, People people, @NotNull String addrType, String addrInfo) {
@@ -78,10 +83,5 @@ public class Addresses {
 		this.addrType = addrType;
 		this.addrInfo = addrInfo;
 	}
-	
-	
-	
-	
-	
 
 }

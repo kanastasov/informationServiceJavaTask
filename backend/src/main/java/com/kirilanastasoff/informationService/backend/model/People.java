@@ -37,28 +37,20 @@ public class People {
 	private String pin;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonManagedReference(
-//			value = "mails"
-	)
+	@JsonManagedReference()
 	@OneToMany(mappedBy = "people", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<Mails> mails = new ArrayList();
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonManagedReference(
-//			value = "addresses"
-	)
+	@JsonManagedReference()
 	@OneToMany(mappedBy = "people", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<Addresses> addresses = new ArrayList();
 
-	
-	
 	public long getId() {
 		return id;
 	}
-
-	
 
 	public String getFullName() {
 		return fullName;
@@ -95,8 +87,6 @@ public class People {
 	public People() {
 		super();
 	}
-	
-	
 
 	public People(long id, @Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName,
 			@Size(min = 10, max = 10) String pin) {
@@ -106,11 +96,11 @@ public class People {
 		this.pin = pin;
 	}
 
-//	public People(@Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName, @Size(min = 10, max = 10) String pin) {
-//		super();
-//		this.fullName = fullName;
-//		this.pin = pin;
-//	}
+	public People(@Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName, @Size(min = 10, max = 10) String pin) {
+		super();
+		this.fullName = fullName;
+		this.pin = pin;
+	}
 
 	public People(@Pattern(regexp = "^[\\p{L} .'-]+$") @NotNull String fullName, @Size(min = 10, max = 10) String pin,
 			List<Mails> mails, List<Addresses> addresses) {
@@ -130,9 +120,5 @@ public class People {
 		this.mails = mails;
 		this.addresses = addresses;
 	}
-	
-	
-	
-	
 
 }

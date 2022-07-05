@@ -1,7 +1,10 @@
 package com.kirilanastasoff.informationService.backend.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 
 import javax.validation.constraints.NotNull;
@@ -34,10 +37,10 @@ public class PeopleController {
 
 	@Autowired
 	private PeopleRepository peopleRepository;
-	
+
 	@Autowired
 	private MailsRepository mailsRepository;
-	
+
 	@Autowired
 	private AddressesRepository addressesRepository;
 
@@ -69,18 +72,49 @@ public class PeopleController {
 	}
 
 	@PostMapping("/people")
-	public ResponseEntity<People> createProduct(@RequestBody People product) {
+	public ResponseEntity<People> createProduct(@RequestBody LinkedHashMap<Object, Object> product) {
+
 		try {
-			People _product = peopleRepository.save(new People(product.getId(), product.getFullName(), product.getPin()));
-			Mails _mails = mailsRepository.save(new Mails(1l, "type", "ivan@mail.com", _product));
-			
-			
-			Addresses _addresses = addressesRepository.save(new Addresses(1l, _product, "addr", "drrr"));
-//			public Addresses(long id, People people, @NotNull String addrType, String addrInfo) {
+			String fullName = "";
+			String pin = "";
+			String email = "";
+			String emailType = "";
+			String address = "";
+			String addressType = "";
+
+			for (Entry<Object, Object> entry : product.entrySet()) {
+				if (entry.getKey().equals("fullName")) {
+					fullName = (String) entry.getValue();
+				} else if (entry.getKey().equals("pin")) {
+					pin = (String) entry.getValue();
+				} else if (entry.getKey().equals("email")) {
+					email = (String) entry.getValue();
+				} else if (entry.getKey().equals("emailType")) {
+					emailType = (String) entry.getValue();
+				} else if (entry.getKey().equals("address")) {
+					address = (String) entry.getValue();
+				} else if (entry.getKey().equals("addressType")) {
+					addressType = (String) entry.getValue();
+				}
+
+//				System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			}
+
+			Optional<Mails> mails = mailsRepository.findByEmail(email);
+
+			if (mails.isPresent()) {
+				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+			}
+
+			People _product = peopleRepository.save(new People(fullName, pin));
+
+			Mails _mails = mailsRepository.save(new Mails(emailType, email, _product));
+			Addresses _addresses = addressesRepository.save(new Addresses(_product, addressType, address));
+
 			return new ResponseEntity<>(_product, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		} 
+		}
 	}
 
 	@PutMapping("/people/{id}")

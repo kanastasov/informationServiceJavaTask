@@ -11,7 +11,10 @@ import 'react-toastify/dist/ReactToastify.css'
 class PeopleList extends Component {
  
     state = {
-        people: []
+        people: [],
+        peopleInitial: [],
+        fullNameFilter: null,
+        globalValue: ''
       };
     
       async componentDidMount() {
@@ -20,6 +23,7 @@ class PeopleList extends Component {
         const body = await response.json();
         console.log(body)
         this.setState({people: body});
+        this.setState({peopleInitial: body});
     
     
       }
@@ -37,26 +41,53 @@ class PeopleList extends Component {
         });
     }
     
+
+    
+      handleSearch = (event) => {
+        let value = event.target.value.toLowerCase();
+        let result = [];
+        console.log(value);
+        result = this.state.people.filter((data) => {
+        return data.fullName.search(value) != -1;
+        });
+
+        this.setState({people: result});  
+        this.setState({globalValue: value});  
+      }
+
+
       render() {
         const {people} = this.state;
         const peopleList = people.map(people => {
-            console.log(people.mails)
             
+            if (this.state.fullNameFilter) {
+                people = this.state.people.filter(
+                  (dt) => dt.fullName === this.state.fullNameFilter
+                );
+              }
+
+              if(this.state.people !== this.state.peopleInitial && this.state.globalValue.length < 1){
+                this.setState({people: this.state.peopleInitial});
+                console.log('different state')
+              }
 
           return <tr key={people.id}>
               <td style={{whiteSpace: 'nowrap'}}>{people.fullName}</td>
               <td>{people.pin}</td>
-
-
               <td>{people.mails[0].email}</td>
+              <td>{people.mails[0].emailType}</td>
               <td>{people.addresses[0].addrInfo}</td>
+              <td>{people.addresses[0].addrType}</td>
               <td>
                   <ButtonGroup>
                       <Button size="sm" color="primary" tag={Link} to={"/api/people/new/" + people.id}>Edit</Button>
                       <Button size="sm" color="danger" onClick={() => this.remove(people.id)}>Delete</Button>
                   </ButtonGroup>
               </td>
+       
           </tr>
+
+          
       });
 
       const notify = () => {
@@ -69,17 +100,25 @@ class PeopleList extends Component {
             <Container fluid>
                 <div className="float-right">
                     <Button color="success" tag={Link} to="/api/people/new">Add People</Button>
-                    <button onClick={notify}>Notify!</button>
+                    {/* <button onClick={notify}>Notify!</button> */}
         <ToastContainer />
                 </div>
                 <h3>List of People</h3>
                 <Table className="mt-4">
                     <thead>
                     <tr>
-                        <th width="20%">Full Name</th>
+
+                        <th>
+                          Search by name
+                        <input type="text" onChange={(event) =>this.handleSearch(event)} />
+                   <br />
+                    Full Name
+                    </th>
                         <th width="20%">PIN</th>
                         <th width="30%">Email</th>
-                        <th width="30%">Address</th>
+                        <th width="30%">Email Type</th>
+                        <th width="30%">Address Info</th>
+                        <th width="30%">Address Type</th>
                         <th width="50%">Actions</th>
                     </tr>
                     </thead>
