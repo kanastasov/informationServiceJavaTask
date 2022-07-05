@@ -18,7 +18,7 @@ class PeopleEdit  extends Component {
         mails: [],
         addresses: [],
         item:{},
-        // emailError: 'errr'
+        emailError: 'errr'
     };
 
     constructor(props) {
@@ -223,9 +223,9 @@ class PeopleEdit  extends Component {
                         <Label for="email">Email</Label>
                         <Input type="text" name="email" id="email" value={item.mails[0] !== undefined ? item.mails[0].email : this.state.email }
                                onChange={this.handleChangeEmail} autoComplete="email"/>
-                                {/* {
+                                {
                                 this.state.emailError ? <span style={{ color: 'red', fontSize: '12px'}}>{  this.state.emailError}</span> : ''
-                                } */}
+                                }
                     </FormGroup>
 
                     <FormGroup>
